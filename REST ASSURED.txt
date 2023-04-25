@@ -1,0 +1,61 @@
+---------------------- GET --------------------
+String EndPoint = "https://example.com/....";
+	@Test
+	public void method() {
+		Response response = RestAssured.get(EndPoint);
+	};
+---------------------- POST --------------------
+String EndPoint = "https://example.com/....";
+	@Test
+	public void method() {
+		RequestSpecification Request = RestAssured.given();
+		Request.body("{\"username\":\"abc\",\"password\":\"123\"}");
+		Request.header("content-type","application/json");	
+		Response response = Request.post(EndPoint);
+	};
+---------------------- PUT --------------------
+String EndPoint = "https://example.com/1234";
+	@Test
+	public void method() {
+		RequestSpecification Request = RestAssured.given();
+		Request.body("{\"username\":\"abc\",\"password\":\"123\"}");
+		Request.header("content-type","application/json");	
+		Response response = Request.put(EndPoint);
+	};
+---------------------- DELETE --------------------
+String EndPoint = "https://example.com/....";
+	@Test
+	public void method() {
+		Response response = RestAssured.delete(EndPoint);
+	};
+-----------------------BDD Option ---------------
+	@Test
+	public void method() {
+		RestAssured
+		.given().baseURL("https://example.com")
+		.when().get("/booking")
+		.then()	.statusCode(200)
+				.statusLine("HTTP/1.1 200 OK")
+				.body("bookingid",Matchers.hasSize(10))
+				.body("bookingid[3]",Matchers.equalTo(1));
+	};
+
+-----------------------RESPONSE ---------------
+// Display 
+System.out.println("Status code: " + response.getStatusCode());   
+System.out.println("All headers: " + response.getHeaders());   
+System.out.println("All body: " +   response.asPrettyString());  
+
+// Get code 
+assertEquals(response.getStatusCode(), 200,"message"); 
+
+
+// Get Header >> Date
+assertEquals(response.getHeader("Date", expectedValue); 
+
+// Get all Response
+assertTrue(response.asString().contains(<expectedInfo>));
+
+// Get Response >> user >> name
+assertEquals(response.jsonPath().getString("user.name");, expectUserName);        
+
